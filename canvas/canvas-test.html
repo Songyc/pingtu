@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+*{margin:0;}
+</style>
+<canvas id="myCanvas" width="640" height="1000" style="display:block;margin:0 auto;">
+</canvas>
+<script>
+document.body.style.width = document.documentElement.clientWidth + "px";
+document.body.style.height = document.documentElement.clientHeight + "px";
+
+var canvas = document.getElementById("myCanvas"),
+ 	context = canvas.getContext("2d"),
+ 	lineWidth = 10,
+ 	info = {
+		imgList: [{
+			src: '../1.png',
+			width: canvas.width - lineWidth,
+			height: 800,
+			left: lineWidth / 2,
+			top: lineWidth / 2
+		},{
+			src: '../2.png',
+			width: 640 - lineWidth * 2,
+			height: 500 - lineWidth * 2
+		},{
+			src: '../3.png',
+			width: 640 - lineWidth * 2,
+			height: 500 - lineWidth * 2
+		}]
+ 	};
+
+context.beginPath();
+context.rect(0, 0, canvas.width, canvas.height);
+context.fillStyle = 'gold';
+context.fill();
+context.lineWidth = lineWidth;
+context.strokeStyle = 'red';
+context.stroke();
+
+var img = new Image();
+img.src = '../1.png';
+img.onload = function (e) {
+	context.beginPath();
+	context.drawImage(this, info.imgList[0].left, info.imgList[0].top, info.imgList[0].width, info.imgList[0].height);
+	context.fill();
+}
+
+context.beginPath();
+context.lineWidth = lineWidth - 4;
+context.strokeStyle = 'red';
+context.moveTo(lineWidth / 2, lineWidth + info.imgList[0].height);
+context.lineTo(canvas.width - lineWidth / 2, lineWidth + info.imgList[0].height);
+context.stroke();
+</script>
+
+</body>
+</html>
